@@ -17,6 +17,7 @@ class CreatePoemsTable extends Migration
             $table->comment = '诗词表';
             $table->increments('id');
             $table->integer('author_id')->index()->unsigned();
+            $table->string('name');
             $table->text('content');
             $table->timestamps();
         });

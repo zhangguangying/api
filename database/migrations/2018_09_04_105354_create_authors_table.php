@@ -15,8 +15,10 @@ class CreateAuthorsTable extends Migration
     {
         Schema::create('authors', function (Blueprint $table) {
             $table->comment = '作者表';
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
             $table->increments('id');
-            $table->string('author_name', 50);
+            $table->string('name', 50);
             $table->string('dynasty', 50)->nullable()->comment('朝代');
             $table->text('introduce')->nullable()->comment('介绍');
             $table->timestamps();
