@@ -45,11 +45,11 @@ class ShiCiController extends Controller
                         $sentence = strip_tags($matches_item[0]);// 名句
                         
                         // 插入作者
-                        $author_poem = explode("《", strip_tags($matches_item[1]));
-                        $author_id = Author::insertGetId(['name' => $author_poem[0]]);
+                        /* $author_poem = explode("《", strip_tags($matches_item[1]));
+                        $author_id = Author::insertGetId(['name' => $author_poem[0]]); */
                         
                         // 插入诗词
-                        $poem_name = explode('》', $author_poem[1])[0];// 诗名
+                        /* $poem_name = explode('》', $author_poem[1])[0];// 诗名
                         preg_match('/href="(.*?)">/ism', $matches_item[1], $poem_url);
                         $poem_url = $poem_url[1];// 诗地址   
                         $curl->get("$this->url/$poem_url");
@@ -59,8 +59,8 @@ class ShiCiController extends Controller
                             'author_id' => $author_id,
                             'name' => $poem_name,
                             'content' => $full,
-                        ]);
-
+                        ]); */
+                        $poem_id = 1;
                         // 插入名句
                         Rhesis::insert([
                             'poem_id' => $poem_id,
