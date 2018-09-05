@@ -16,3 +16,5 @@ $router->get('/', function () use ($router) {
 });
 
 $router->get('shici', 'ShiCiController@getShiCi');
+
+$router->get('shici/daily', 'ShiCiController@dailySentence');

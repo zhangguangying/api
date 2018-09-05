@@ -7,6 +7,7 @@ use App\Models\Poem;
 use App\Models\Author;
 use App\Models\Rhesis;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 
 class ShiCiController extends Controller
 {
@@ -78,5 +79,29 @@ class ShiCiController extends Controller
         // 正则匹配到名句，把名句拆分：句子、作者、名称
         // 匹配到名称的 url 
         // 获取完整的诗词
+    }
+
+    // 每日一句诗词
+    public function dailySentence()
+    {
+        $date = date('Y-m-d');
+        
+        if ($sentence = Redis::get($date)) {
+            return response()->json([
+                'code' => 200,
+                'sentence' => $sentence,
+            ]);
+        } else {
+            $id = rand(1, 10000);
+            $sentence = Rhesis::find($id);
+
+            Redis::flushdb();
+            Redis::set($date, $sentence->sentence);
+
+            return response()->json([
+                'code' => 200,
+                'sentence' => $sentence->sentence,
+            ]);
+        }
     }
 }
